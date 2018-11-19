@@ -1,0 +1,73 @@
+<div class="topnav">
+	  <a class="active" href="#home">SNJ</a>
+	  <a href="#contact">Contact</a>
+	  <a href="#about">About</a>
+	  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+		<i class="fa fa-bars"></i>
+	  </a>	
+</div>
+<div class="container">
+  <form action="/validacion" method="post">
+    <div class="row" align="middle">
+			<img src="images/logo_app.png" alt="Avatar" style="width:100px;height:100px;" >
+	</div>
+	<!--nombre-->
+	{{#if errors.name.hasErrors}}
+	    <!-- Error -->
+	    <div class="row" align="middle">
+    	  <div class="col-25">
+    		<label for="nombre">Cuenta</label>
+    	  </div>
+    	  <div class="col-75" >
+    		<input type="text" id="nombre" name="nombre_usuario" placeholder="Cuenta de Usuario" value="{{user.name}}" require>
+    	  </div>
+    	</div>
+    	<div class="row" align="middle">
+    	  <div class="col-25">
+    		<label for="error_nombre">{{errors.name.error}}</label>
+    	  </div>
+    	</div>
+	{{else}}
+	    <!-- Bien -->
+    	<div class="row" align="middle">
+    	  <div class="col-25">
+    		<label for="nombre">Cuenta</label>
+    	  </div>
+    	  <div class="col-75" >
+    		<input type="text" id="nombre" name="nombre_usuario" placeholder="Cuenta de Usuario" value="{{user.name}}" require>
+    	  </div>
+    	</div>
+	{{/if}}
+	<!--Contrasena-->
+    {{#if errors.password.hasErrors}}
+        <div class="row" align="middle">
+          <div class="col-25">
+            <label for="lname">Contraseña</label>
+          </div>
+          <div class="col-75">
+            <input type="password" id="contrasena" name="password" placeholder="Contraseña" value = "{{user.password}}" require>
+          </div>
+        </div>
+        <div class="row" align="middle">
+    	  <div class="col-25">
+    		<label for="error_contrasena">{{errors.password.error}}</label>
+    	  </div>
+    	</div>
+    {{else}}
+        <!--Bien-->
+        <div class="row" align="middle">
+          <div class="col-25">
+            <label for="lname">Contraseña</label>
+          </div>
+          <div class="col-75">
+            <input type="password" id="contrasena" name="password" placeholder="Contraseña" value = "{{user.password}}" require>
+          </div>
+        </div>
+    {{/if}}
+    <!--boton-->
+    <div class="row" >
+        <label ></label>
+      <input type="submit" value="Ingresar">
+    </div>
+  </form>
+</div>
