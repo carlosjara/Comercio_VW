@@ -7,84 +7,89 @@ var _ = require('lodash');
 
 var client = new Client();
 
-router.post('/',function(req,res){
+router.post('/', function(req, res) {
     //validamos que los campos no esten vacios
-    var val_result = validator.validateBlankUser(req.body.nombre_usuario,req.body.contrasena);
-    if (val_result.hasErrors){
-        res.render('login',{title: 'Login', user: {name: req.body.nombre_usuario, password: req.body.contrasena}, errors: val_result});
+    var val_result = validator.validateBlankUser(req.body.nombre_usuario, req.body.password);
+    if (val_result.hasErrors) {
+        res.render('login', { title: 'Login', user: { name: req.body.nombre_usuario, password: req.body.password }, errors: val_result });
     }
     /*Mezcla rara*/
     var user = {
         name: {
-            hasProblem : false
+            hasProblem: false
         },
         password: {
-            hasProblem : false
+            hasProblem: false
         },
-        hasProblems : false
+        hasProblems: false
     };
     var done = _.after(2, function() {
-        if (res1["count(id_usuario)"]==0) {
+        if (res1["validador"] == 0) {
             user.name.problem = "El nombre de usuario no está registrado, favor comunicarse con un administrador.";
             user.name.hasProblem = true;
-            user.hasProblems =  true;
+            user.hasProblems = true;
         }
-        else{
-                if(res2["res"] != 'isUser'){
-                        user.password.problem = "Error: La contraseña no es correcta, favor comunicarse con un administrador.";
-                        user.password.hasProblem = true;    
-                        user.hasProblems =  true;
-                    }
+        else {
+            if (res2["res"] != 'isUser') {
+                user.password.problem = "Error: La contraseña no es correcta, favor comunicarse con un administrador.";
+                user.password.hasProblem = true;
+                user.hasProblems = true;
+            }
         }
-        
-        if (user.hasProblems){
-            res.render('login',{title: 'Login', user: {name: req.body.name , password: req.body.password}, user_problems: user});
-        }else{
-            /*var id = encodeURIComponent(res1["id_usuario"]);
-            var typeUserValidator = {
-                        data: {"id":id},
-                        headers: { "Content-Type": "application/json" }
-                      };
-                      
-            client.post("https://rest-hectordavid1228.c9users.io:8081/getUserType", typeUserValidator, function (data, response) {
+        if (user.hasProblems) {
+            res.render('login', { title: 'Login', user: { name: req.body.nombre_usuario, password: req.body.password }, user_problems: user });
+        }
+        else {
+            //res.render('login',{title: 'Login', user: {name: "", password: ""}});
+            var id = encodeURIComponent(res1["id"]);
+            var roleUserValidator = {
+                data: { "id": id },
+                headers: { "Content-Type": "application/json" }
+            };
+
+            client.post("https://comercio-rest-carlosjara.c9users.io:8081/getUSerRole", roleUserValidator, function(data, response) {
                 // parsed response body as js object
-                res1 = data[0].rol;
-                if (res1 == 1){
+                res1 = data["res"][0].rol;
+                res.render('login', { title: 'Login', user: { name: res1, password: "" } });
+                /*if (res1 == 'usuario'){
                     res.redirect('/estudiante_resumen/' + id);
                 }else if (res1 == 2){
                     res.redirect('/profesor_resumen/' + id);
                 }else if (res1 == 3){
                     res.redirect('/administrador_cursos/' + id);
-                }
-              });*/
-            
+                }*/
+                /*if (res1 == 'usuario'){
+                    res.redirect('/usuario_catalogo/' + id);
+                }else if (res1 == 2){
+                    res.redirect('/administrador/' + id);
+                }*/
+
+            });
         }
     });
-    
-    var res1 = 0;
+    var res1 = "";
     var res2 = "";
-/*    var argsIsUser = {
-        data: {"user":req.body.name},
+    var argsIsUser = {
+        data: { "user": req.body.nombre_usuario },
         headers: { "Content-Type": "application/json" }
-      };
-    
+    };
+
     var argsUserValidated = {
-                data: {"user":req.body.name,"password":req.body.password},
-                headers: { "Content-Type": "application/json" }
-              };
-              
-    client.post("https://rest-hectordavid1228.c9users.io:8081/isUSer", argsIsUser, function (data, response) {
+        data: { "nombre_usuario": req.body.nombre_usuario, "contrasena": req.body.password },
+        headers: { "Content-Type": "application/json" }
+    };
+
+    client.post("https://comercio-rest-carlosjara.c9users.io:8081/isUser", argsIsUser, function(data, response) {
         // parsed response body as js object
         res1 = data.res;
         done();
-      });
-    
-    client.post("https://rest-hectordavid1228.c9users.io:8081/userValidated", argsUserValidated, function (data, response) {
-                // parsed response body as js object
-                res2 = data;
-                done();
-                
-              });*/
+    });
+
+    client.post("https://comercio-rest-carlosjara.c9users.io:8081/userValidated", argsUserValidated, function(data, response) {
+        // parsed response body as js object
+        res2 = data;
+        done();
+    });
 });
 
 module.exports = router;

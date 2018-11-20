@@ -1,0 +1,25 @@
+<div class="topnav">
+    <a class="active" href="#home">{{title}}</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()" align="right">
+		<i class="fa fa-bars" align="right"></i>
+	  </a>
+</div>
+{{#each libros}}
+<div class="shop-card" align="center">
+    <div class="title">
+        <label>{{this.nombre}} </label>
+    </div>
+    <div class="desc">
+        <label>{{this.Author}}</label>
+    </div>
+    <div class="slider">
+        <img src= {{this.imagen}} style='height: 100%; width: 100%; object-fit: contain' />
+    </div>
+    <div class="cta">
+        <div class="price">$ {{this.precio_unitario}} COP</div>
+        <button class="btn">Add to cart<span class="bg"></span></button>
+    </div>
+</div>
+{{/each}}

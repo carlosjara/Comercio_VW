@@ -28,8 +28,9 @@
     	  </div>
     	</div>
 	{{else}}
-	    <!-- Bien -->
-    	<div class="row" align="middle">
+	    {{#if user_problems.name.hasProblem}}
+	    <!-- Error -->
+	    <div class="row" align="middle">
     	  <div class="col-25">
     		<label for="nombre">Cuenta</label>
     	  </div>
@@ -37,9 +38,25 @@
     		<input type="text" id="nombre" name="nombre_usuario" placeholder="Cuenta de Usuario" value="{{user.name}}" require>
     	  </div>
     	</div>
+    	<div class="row" align="middle">
+    	  <div class="col-25">
+    		<label for="error_nombre">{{user_problems.name.problem}}</label>
+    	  </div>
+    	</div>
+	    {{else}}
+  	    <!-- Bien -->
+      	<div class="row" align="middle">
+      	  <div class="col-25">
+      		<label for="nombre">Cuenta</label>
+      	  </div>
+      	  <div class="col-75" >
+      		<input type="text" id="nombre" name="nombre_usuario" placeholder="Cuenta de Usuario" value="{{user.name}}" require>
+      	  </div>
+      	</div>
+      {{/if}}
 	{{/if}}
 	<!--Contrasena-->
-    {{#if errors.password.hasErrors}}
+  {{#if errors.password.hasErrors}}
         <div class="row" align="middle">
           <div class="col-25">
             <label for="lname">Contraseña</label>
@@ -50,20 +67,36 @@
         </div>
         <div class="row" align="middle">
     	  <div class="col-25">
-    		<label for="error_contrasena">{{errors.password.error}}</label>
+    		  <label for="error_contrasena">{{errors.password.error}}</label>
     	  </div>
     	</div>
-    {{else}}
-        <!--Bien-->
-        <div class="row" align="middle">
-          <div class="col-25">
-            <label for="lname">Contraseña</label>
+  {{else}}
+        {{#if user_problems.password.hasProblem}}
+          <div class="row" align="middle">
+            <div class="col-25">
+              <label for="lname">Contraseña</label>
+            </div>
+            <div class="col-75">
+              <input type="password" id="contrasena" name="password" placeholder="Contraseña" value = "{{user.password}}" require>
+            </div>
           </div>
-          <div class="col-75">
-            <input type="password" id="contrasena" name="password" placeholder="Contraseña" value = "{{user.password}}" require>
+          <div class="row" align="middle">
+        	  <div class="col-25">
+        		  <label for="error_contrasena">{{user_problems.password.problem}}</label>
+        	  </div>
+      	  </div>
+        {{else}}
+          <!--Bien-->
+          <div class="row" align="middle">
+            <div class="col-25">
+              <label for="lname">Contraseña</label>
+            </div>
+            <div class="col-75">
+              <input type="password" id="contrasena" name="password" placeholder="Contraseña" value = "{{user.password}}" require>
+            </div>
           </div>
-        </div>
-    {{/if}}
+        {{/if}}  
+  {{/if}}
     <!--boton-->
     <div class="row" >
         <label ></label>

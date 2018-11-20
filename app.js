@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var validation = require('./routes/validation');
+var catalogo_usuario = require('./routes/catalogo');
 var login = require('./routes/login');
 
 var app = express();
@@ -25,6 +26,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/validacion', validation);
 app.use('/login', login);
+app.use('/catalogo_usuario', catalogo_usuario);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,7 +44,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8080,function () {
-    console.log('Corriendo en el puerto: 8080');
+app.listen(8080, function() {
+  console.log('Corriendo en el puerto: 8080');
 });
 module.exports = app;

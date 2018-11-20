@@ -5,10 +5,10 @@ var exports = module.exports = {};
 exports.validateBlankUser = function(name, password) {
     var errors = {
         name: {
-            hasErrors : false
+            hasErrors: false
         },
         password: {
-            hasErrors : false
+            hasErrors: false
         }
     };
 
@@ -21,10 +21,20 @@ exports.validateBlankUser = function(name, password) {
         errors.password.error = "El campo Contraseña es Obligatorio";
         errors.password.hasErrors = true;
     }
-
-
     errors.hasErrors = errors.name.hasErrors || errors.password.hasErrors;
     return errors;
 }
 
+exports.validateUser = function(name, password) {
+    var user = {
+        name: {
+            hasProblems: false
+        },
+        password: {
+            hasProblems: false
+        }
+    };
 
+    user.hasProblems = user.password.hasProblems || user.name.hasProblems;
+    return user;
+}
