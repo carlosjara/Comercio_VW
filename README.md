@@ -60,18 +60,14 @@ En esta carpeta se encuentran los templates con handlebars que usan objetos json
 {{/each}}
 ```
 
-##### app.js
+#### [app.js](https://github.com/carlosjara/Comercio_VW/blob/master/app.js)
 
 En este archivo se encuentra la configuracion principal de este servidor, el puerto de acceso y configuracion de handlebars para visualizacion de templates a mostrar.
 
-##### Package.json
+#### [Package.json](https://github.com/carlosjara/Comercio_VW/blob/master/package.json)
 
 Se encuentran los complementos usandos en este desarrollo, al ejecutar el comando
 ```html
-{{#ifCond cart '==' '0'}}
-    <a>Carrito</a> 
-{{else}}
-    <a href="/carrito_usuario/{{idUser}}">Carrito ({{cart}})</a> 
-{{/ifCond}}
+npm install
 ```
 se crearala la carpeta node_modules en donde estan la fuentes de todos estos complementos.
