@@ -1,0 +1,49 @@
+<div class="topnav">
+    <a class="active" href="/carrito_usuario/{{idUser}}">{{title}}</a>
+    <a href="/catalogo_usuario/{{idUser}}">Catalogo</a>
+    {{#ifCond cart '==' '0'}}
+        <a href="/carrito_usuario/{{idUser}}">Cantidad Total </a> 
+    {{else}}
+        <a href="/carrito_usuario/{{idUser}}">Items({{cart}}) </a> 
+        <a href="/carrito_usuario/{{idUser}}">${{Total}} COP</a>
+    {{/ifCond}}
+    <span class="active"><a href="/login"align="right">Salir</a></span>
+</div>
+
+{{#each libros}}
+<div class="shop-card" align="center">
+    <div class="title">
+        <label>{{this.product_name}} </label>
+    </div>
+    <div class="desc">
+        <label>{{this.product_author}}</label>
+    </div>
+    <div class="slider">
+        <label>Cantidad : {{this.product_cant}}</label>
+    </div>
+    <div class="cta">
+        <div class="price">$ {{this.product_price}} COP</div>
+        <form action="/carrito_usuario/borrar_item/{{../idUser}}/prd/{{this.id_product}}" method="get">
+            <div class="row">
+                <label></label>
+                <span class="bg"></span>
+                <input type="submit" class="btn" value="Eliminar (1)">
+            </div>
+        </form>
+        <form action="/carrito_usuario/borrar_items/{{../idUser}}/prd/{{this.id_product}}" method="get">
+            <div class="row">
+                <label></label>
+                <span class="bg"></span>
+                <input type="submit" class="btn" value="Eliminar (todos)">
+            </div>
+        </form>
+    </div>
+</div>
+{{/each}}
+
+<form action="/carrito_usuario/pagar/{{idUser}}" method="post">
+    <div class="row" align="middle">
+        <label></label>
+        <input type="submit" value="Pagar ($ {{Total}})">
+    </div>
+</form>

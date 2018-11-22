@@ -46,19 +46,19 @@ router.post('/', function(req, res) {
                 data: { "id": id },
                 headers: { "Content-Type": "application/json" }
             };
-
+            
             client.post("https://comercio-rest-carlosjara.c9users.io:8081/getUSerRole", roleUserValidator, function(data, response) {
                 // parsed response body as js object
                 res1 = data["res"][0].rol;
-                res.render('login', { title: 'Login', user: { name: res1, password: "" } });
-                /*if (res1 == 'usuario'){
-                    res.redirect('/estudiante_resumen/' + id);
-                }else if (res1 == 2){
+                //res.render('login', { title: 'Login', user: { name: res1, password: "" } });
+                if (res1 == 'usuario'){
+                    res.redirect('/catalogo_usuario/' + id);
+                }/*else if (res1 == 2){
                     res.redirect('/profesor_resumen/' + id);
                 }else if (res1 == 3){
                     res.redirect('/administrador_cursos/' + id);
-                }*/
-                /*if (res1 == 'usuario'){
+                }
+                if (res1 == 'usuario'){
                     res.redirect('/usuario_catalogo/' + id);
                 }else if (res1 == 2){
                     res.redirect('/administrador/' + id);

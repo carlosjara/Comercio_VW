@@ -1,0 +1,58 @@
+<div class="topnav">
+    <a class="active" href="/end_usuario/{{idUser}}">{{title}}</a>
+<!--    <a class="active" href="/confirmacion_usuario/{{idUser}}/tkn/{{token}}">{{title}}</a> -->
+    <a href="/catalogo_usuario/{{idUser}}">Catalogo</a>
+        <a href="/end_usuario/{{idUser}}">Cantidad Total </a> 
+        <a href="/end_usuario/{{idUser}}">Items({{cart}}) </a> 
+        <a href="/end_usuario/{{idUser}}">${{Total}} COP</a>
+    <span class="active"><a href="/login"align="right">Salir</a></span>
+</div>
+<div class="shop-card" align="center">
+    <div class="title">
+        <label>{{title}}</label>
+    </div>
+    {{#ifCond status '==' 'delivered'}}
+    <div class="desc">
+        <label>Gracias por tu compra!</label>
+    </div>
+    <div class="slider">
+        <label>Estado de Compra: {{status}}</label>
+    </div>
+    {{else}}
+        <div class="desc">
+            <label>Aun no se completa la compra, Validalo con tu asesor!</label>
+        </div>
+        <div class="slider">
+            <label>Estado de Compra: {{status}}</label>
+        </div>
+    {{/ifCond}}
+    <div class="slider">
+        <label>Cantidad : {{cart}}</label>
+    </div>
+    <div class="cta">
+        <div class="price">$ {{Total}} COP</div>
+    </div>
+</div>
+{{#each libros}}
+<div class="shop-card" align="center">
+    <div class="title">
+        <label>{{this.product_name}} </label>
+    </div>
+    <div class="desc">
+        <label>{{this.product_author}}</label>
+    </div>
+    <div class="slider">
+        <label>Cantidad : {{this.product_cant}}</label>
+    </div>
+    <div class="slider">
+        <div class="price">$ {{this.product_price}} COP</div>
+    </div>
+</div>
+{{/each}}
+
+<form action="/catalogo_usuario/{{idUser}}" method="get">
+    <div class="row" align="middle">
+        <label></label>
+        <input type="submit" value="Volver Catalogo">
+    </div>
+</form>

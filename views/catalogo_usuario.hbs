@@ -1,10 +1,12 @@
 <div class="topnav">
-    <a class="active" href="#home">{{title}}</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()" align="right">
-		<i class="fa fa-bars" align="right"></i>
-	  </a>
+    <a class="active" href="/catalogo_usuario/{{idUser}}">{{title}}</a>
+    <span class="active"><a href="/login">Salir</a></span>
+    {{#ifCond cart '==' '0'}}
+        <a>Carrito </a> 
+    {{else}}
+    <a href="/carrito_usuario/{{idUser}}">Carrito ({{cart}})</a> 
+    {{/ifCond}}
+    
 </div>
 {{#each libros}}
 <div class="shop-card" align="center">
@@ -15,11 +17,17 @@
         <label>{{this.Author}}</label>
     </div>
     <div class="slider">
-        <img src= {{this.imagen}} style='height: 100%; width: 100%; object-fit: contain' />
+        <img src={{this.imagen}} style='height: 100%; width: 100%; object-fit: contain' />
     </div>
     <div class="cta">
         <div class="price">$ {{this.precio_unitario}} COP</div>
-        <button class="btn">Add to cart<span class="bg"></span></button>
+        <form action="/catalogo_usuario/agregarCarro/{{this.id}}/precio/{{this.precio_unitario}}/nombre/{{this.nombre}}/author/{{this.Author}}/is/{{../idUser}}" method="get">
+            <div class="row">
+                <label></label>
+                <span class="bg"></span>
+                <input type="submit" class="btn" value="Agregar al Carrio">
+            </div>
+        </form>
     </div>
 </div>
 {{/each}}
