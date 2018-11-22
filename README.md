@@ -1,7 +1,7 @@
 # Comercio_VW
 Este repositorio sera el indicado para la vista como servidor.
 
-### Descripcion
+### Descripción
 
 En este servidor se podran encontrar todos los fuentes (nodejs express, handlebars y mysql) asociados a vistas de la aplicacion que consumirá los servicios rest en [*Comercio_REST*](https://github.com/carlosjara/Comercio_REST) y en [*TPaga*](http://payment-links.docs.tpaga.co/quickstart.html#autenticacion-contra-la-tpaga-api), se busca dar detallada explicacion de cada carpeta.
 
@@ -23,7 +23,7 @@ Se encuentra dividida e:
 
 En esta carpeta se encuentran los templates con handlebars que usan objetos json para complementar la informacion usada y mostrada al usuario, estos templates cuentan con ciclos, condicionales y demas que permiten facilidad en la elaboracion del html a mostrar.
 
-Ejemplo condicionales
+*Ejemplo condicionales*
 
 ```html
 {{#ifCond cart '==' '0'}}
@@ -32,7 +32,7 @@ Ejemplo condicionales
     <a href="/carrito_usuario/{{idUser}}">Carrito ({{cart}})</a> 
 {{/ifCond}}
 ```
-Ejemplo Ciclo
+*Ejemplo Ciclo*
 
 ```html
 {{#each libros}}
@@ -60,6 +60,18 @@ Ejemplo Ciclo
 {{/each}}
 ```
 
-## app.js
+##### app.js
 
 En este archivo se encuentra la configuracion principal de este servidor, el puerto de acceso y configuracion de handlebars para visualizacion de templates a mostrar.
+
+###### Package.json
+
+Se encuentran los complementos usandos en este desarrollo, al ejecutar el comando
+```html
+{{#ifCond cart '==' '0'}}
+    <a>Carrito</a> 
+{{else}}
+    <a href="/carrito_usuario/{{idUser}}">Carrito ({{cart}})</a> 
+{{/ifCond}}
+```
+se crearala la carpeta node_modules en donde estan la fuentes de todos estos complementos.
